@@ -37,7 +37,16 @@ const PhotoSchema = new mongoose.Schema(
     materials: {
       type: Array,
       required: true,
-    }
+    },
+    comments: {
+      type: Array,
+      required: false,
+    },
+    likes: {
+      type: Array,
+      required: false,
+    },
+
   },
   {
     timestamps: true,

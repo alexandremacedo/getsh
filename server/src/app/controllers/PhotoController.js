@@ -10,7 +10,6 @@ class PhotoController {
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      user_id: Yup.number().required(),
       photo_id: Yup.number().required(),
       city: Yup.string().required(),
       country: Yup.string().required(),
@@ -25,10 +24,10 @@ class PhotoController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { user_id, photo_id, city, country, district, state, description, lat_long, materials } = req.body;
+    const { photo_id, city, country, district, state, description, lat_long, materials } = req.body;
 
     const photo = await Photo.create({
-      user_id,
+      user_id: req.userId,
       photo_id,
       city,
       country,
@@ -37,10 +36,12 @@ class PhotoController {
       description,
       lat_long,
       materials,
+      comment: [],
+      likes: [],
     });
 
     await UserPhoto.findOne(
-      { user_id },
+      { user_id: req.userId },
       async function (err, item) {
         if (err) {
           console.log('Sem')
@@ -53,7 +54,7 @@ class PhotoController {
             });
           } else {
             await UserPhoto.create(
-              { user_id, user_photos: [{ photo }] },
+              { user_id: req.userId, user_photos: [{ photo }] },
               function (err, person) {
                 if (err) return handleError(err);
               });

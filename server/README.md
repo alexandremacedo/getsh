@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="getsh" title="getsh" src="../.github/getsh-mustache-icon.png" width="200px" />
+  <img alt="getsh" title="getsh" src="../.github/getsh-icon.svg" width="120px" />
 </h1>
 
 <h3 align="center">
@@ -87,6 +87,11 @@ POST   | /sessions                          | \src\app\controllers\SessionContro
 POST   | /files                             | \src\app\controllers\FileController                   | store      | yes
 POST   | /photos                            | \src\app\controllers\PhotoController                  | store      | yes
 GET    | /photos/:userId/userphotos         | \src\app\controllers\UserPhotoController              | index      | yes
+GET    | /photos/:photoId/comments          | \src\app\controllers\CommentController                | index      | yes
+POST   | /photos/comments                   | \src\app\controllers\CommentController                | store      | yes
+PUT    | /photos/comments/:commentId        | \src\app\controllers\CommentController                | delete     | yes
+GET    | /photos/:photoId/likes             | \src\app\controllers\LikeController                   | index      | yes
+POST   | /photos/likes                      | \src\app\controllers\LikeController                   | store      | yes
 
 
 ## Consulte a documentação

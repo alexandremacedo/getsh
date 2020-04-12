@@ -39,7 +39,6 @@ class App {
   }
 
   middlewares() {
-    this.app.use(Sentry.Handlers.requestHandler());
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(
@@ -56,7 +55,6 @@ class App {
 
   routes() {
     this.app.use(routes);
-    this.app.use(Sentry.Handlers.errorHandler());
   }
 
   exceptionHandler() {
