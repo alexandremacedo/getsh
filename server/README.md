@@ -7,7 +7,7 @@
 </h3>
 
 <h4 align="center">
-  NodeJS + Docker + Sequelize + Bee queue
+  NodeJS + Docker + Sequelize
 </h4>
 
 <p align="center">
