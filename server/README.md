@@ -7,7 +7,7 @@
 </h3>
 
 <h4 align="center">
-  NodeJS + Docker + Sequelize + Bee queue
+  NodeJS + Docker + Sequelize
 </h4>
 
 <p align="center">
@@ -27,12 +27,12 @@
 <p align="center">
   <a href="#pré-requisitos">Pré requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#instalação">Instalação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#license">Licença</a>
+  <a href="#endpoints">Endpoints</a>
 </p>
 
 
 # Getsh server
-Getsh server is an api for scheduling services build with Node.js
+Getsh server - Api for web and mobile applications
 
 
 ## Pré requisitos
