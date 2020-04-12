@@ -32,7 +32,7 @@
 
 
 # Getsh server
-Getsh server is an api for scheduling services build with Node.js
+Getsh server - Api for web and mobile applications
 
 
 ## Pré requisitos
