@@ -5,6 +5,7 @@ import File from '../models/File';
 class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
+      username: Yup.string().required(),
       name: Yup.string().required(),
       email: Yup.string()
         .email()
@@ -24,13 +25,20 @@ class UserController {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const { id, name, email, provider } = await User.create(req.body);
+    const usernameExists = await User.findOne({ where: { username: req.body.username } });
 
-    return res.json({ id, name, email, provider });
+    if (usernameExists) {
+      return res.status(400).json({ error: 'Username already exists' });
+    }
+
+    const { id, username, name, email, provider } = await User.create(req.body);
+
+    return res.json({ id, username, name, email, provider });
   }
 
   async update(req, res) {
     const schema = Yup.object().shape({
+      username: Yup.string(),
       name: Yup.string(),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
@@ -58,6 +66,13 @@ class UserController {
       }
     }
 
+    if (username !== user.username) {
+      const usernameExists = await User.findOne({ where: { username } });
+      if (usernameExists) {
+        return res.status(400).json({ error: 'Username already exists' });
+      }
+    }
+
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
       return res.status(401).json({ error: 'Password does not match' });
     }
@@ -74,7 +89,7 @@ class UserController {
       ],
     });
 
-    return res.json({ id, name, email, avatar });
+    return res.json({ id, username, name, email, avatar });
   }
 }
 

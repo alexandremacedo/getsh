@@ -4,10 +4,10 @@ import mongoose from 'mongoose';
 
 class LikeController {
   async index(req, res) {
-    const { photoId } = req.params
+    const { photo_id } = req.body
 
     const { likes } = await Photo.findOne(
-      { photo_id: photoId },
+      { photo_id },
     );
 
     return res.status(200).json(likes)
@@ -23,25 +23,25 @@ class LikeController {
     }
 
     const { photo_id } = req.body;
-    const userId = req.userId;
+    const user_id = req.userId;
 
     const like_id = mongoose.Types.ObjectId();
 
-    Photo.findOne({ 'likes': { $elemMatch: { user_id: userId } } }, async function (err, like) {
+    Photo.findOne({ photo_id }, { 'likes': { $elemMatch: { user_id } } }, async function (err, like) {
       if (err) {
         return res.status(401).json({ error: 'Error like' });
       }
 
-      if (like) {
+      if (like.likes.length !== 0) {
         await Photo.updateOne(
-          {},
-          { $pull: { 'likes': { user_id: userId } } }, { 'new': true }, function (err, model) {
+          { photo_id },
+          { $pull: { 'likes': { user_id } } }, { 'new': true }, function (err, model) {
             if (err) {
               return res.status(404).json({ "message": "Dislike", "erro": true });;
             }
           }
         );
-        return res.status(200).json({ "like": false });
+        return res.status(200).json({ "like": true });
 
       } else {
         await Photo.findOne(
@@ -51,7 +51,7 @@ class LikeController {
               return res.status(401).json({ error: 'Error like' })
             } else {
               await item.likes.push({
-                user_id: userId,
+                user_id,
                 like_id,
                 created_at: new Date()
               });
@@ -63,10 +63,9 @@ class LikeController {
           }
         );
       }
-      return res.status(200).json({ "like": true });
+      return res.status(200).json({ "like": false });
 
     })
-
   }
 
 }
