@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Getsh server - Api for web and mobile applications
+  Getsh server - Api for web and mobile applications 
 </h3>
 
 <h4 align="center">
