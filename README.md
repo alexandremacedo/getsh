@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Getsh - Take a picture get a hug from nature
+  Getsh - Take a picture, clean the planet
 </h3>
 
 <h4 align="center">
